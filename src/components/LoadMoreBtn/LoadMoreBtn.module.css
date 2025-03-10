@@ -1,0 +1,24 @@
+.loadMore {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.loadBtn {
+  display: block;
+  border-radius: 8px;
+  background-color: #364b9a;
+  border: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 8px 25px;
+}
+
+.loadBtn:hover,
+.loadBtn:focus {
+  background-color: #032184;
+}

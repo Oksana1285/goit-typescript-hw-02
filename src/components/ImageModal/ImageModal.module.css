@@ -1,0 +1,45 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(41, 27, 27, 0.7);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 1px solid #131ddb;
+  border-radius: 8px;
+  background-color: #364b9a;
+}
+
+.modalBtn {
+  display: block;
+  margin-bottom: 20px;
+  margin-left: auto;
+}
+
+.modalImg {
+  display: block;
+  border-radius: 8px;
+  max-height: 70vh;
+  max-width: 70vw;
+}
+
+.modalText {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
