@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import css from './App.module.css';
 import fetchGalleryImage from './components/api/api';
+import { Photo, FetchGalleryPhotoResponse } from './App.types';
 
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import ImageGallery from './components/ImageGallery/ImageGallery';
@@ -11,18 +12,18 @@ import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import SearchBar from './components/SearchBar/SearchBar';
 
 const App = () => {
-  const [gallery, setGallery] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(0);
-  const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [gallery, setGallery] = useState<Photo[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [query, setQuery] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState('');
-  const [description, setDescription] = useState('');
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
-  const referation = useRef(null);
+  const referation = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!query) return;
@@ -31,8 +32,10 @@ const App = () => {
       try {
         setLoading(true);
         setError(false);
-        const data = await fetchGalleryImage(query, page);
-        // console.log('data:', data);
+        const data: FetchGalleryPhotoResponse = await fetchGalleryImage(
+          query,
+          page
+        );
         if (data.total === 0) return;
         setGallery(prevGallery => {
           return [...prevGallery, ...data.results];
@@ -55,7 +58,7 @@ const App = () => {
     }
   }, [page, gallery]);
 
-  const handleQuery = newQuery => {
+  const handleQuery = (newQuery: string) => {
     setQuery(newQuery);
     setGallery([]);
     setPage(1);
@@ -69,7 +72,7 @@ const App = () => {
     setModalOpen(false);
   };
 
-  const upgradeModalData = (scr, alt) => {
+  const updateModalData = (scr: string, alt: string) => {
     setModalImage(scr);
     setDescription(alt);
   };
@@ -87,13 +90,13 @@ const App = () => {
         <ImageGallery
           gallery={gallery}
           openModal={openModal}
-          upgradeModalData={upgradeModalData}
+          updateModalData={updateModalData}
         />
       )}
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {gallery.length > 0 && !loading && !error && (
-        <LoadMoreBtn handleLoadMore={handleLoadMore} isActive={active} />
+        <LoadMoreBtn handleLoadMore={handleLoadMore} active={active} />
       )}
       <ImageModal
         modalOpen={modalOpen}

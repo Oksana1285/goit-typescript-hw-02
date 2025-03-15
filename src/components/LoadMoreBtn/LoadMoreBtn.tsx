@@ -1,6 +1,11 @@
 import css from './LoadMoreBtn.module.css';
 
-const LoadMoreBtn = ({ handleLoadMore, active }) => {
+type Prop = {
+  handleLoadMore: () => void;
+  active: boolean;
+};
+
+const LoadMoreBtn: React.FC<Prop> = ({ handleLoadMore, active }) => {
   return (
     <div className={css.loadMore}>
       <button
